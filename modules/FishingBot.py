@@ -50,7 +50,7 @@ class FishingBot():
         self.time_since_bait = None
         self.bait_time = None
         # Initialize TSMWrapper for fish prices
-        self.tsm = TSMWrapper(settings_helper=self.settings_helper)
+        # self.tsm = TSMWrapper(settings_helper=self.settings_helper)
         self.fish_map = {
             'scalebelly_mackerel': {
                 'template': None,
@@ -203,7 +203,7 @@ class FishingBot():
                 return True
         return False
 
-    # This function could probably be done in a separate thread since it takes a few seconds on slower machines/VMs.
+    # This  functioncould probably be done in a separate thread since it takes a few seconds on slower machines/VMs.
     def count_loot(self, loot_box):
         logger.info("Tracking what loot we got")
         highest_fish, highest_conf, highest_loc, highest_scale = None, None, None, None
@@ -397,6 +397,7 @@ class FishingBot():
                         self.no_fish_casts += 1
 
 
+    # 自动售卖
     def auto_vendor(self, mammoth_hotkey, target_hotkey, interact_hotkey):
         """Gets on mount, targets shop npc, and opens shop for addon to auto sell trash."""
         logger.info('Starting auto vendor')
@@ -476,7 +477,7 @@ class FishingBot():
 
             asyncio.run(send_discord_progress_report())
 
-
+    # 转换坐标
     def translate_coords(self, coords, sub_region = None):
         """Translates game coords to screen coords."""
         if sub_region == None:
@@ -493,11 +494,12 @@ class FishingBot():
         # Launch the game if it's not already open.
         if self.game_window_handle == 0:
             logger.info(f"Couldn't find an open WoW client. Launching game.")
+            sys.exit(10)
             # Open game
-            self.break_helper.launch_game()
-            # Get new handle after opening game
-            self.game_window_handle = FindWindow(self.game_window_class, self.game_window_name)
-        # Set game client variables
+        #     self.break_helper.launch_game()
+        #     # Get new handle after opening game
+        #     self.game_window_handle = FindWindow(self.game_window_class, self.game_window_name)
+        # # Set game client variables
         self.game_window_rect = GetWindowRect(self.game_window_handle)  # left, top, right, bottom
         self.game_size = GetClientRect(self.game_window_handle)
 

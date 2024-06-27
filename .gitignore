@@ -1,9 +1,9 @@
 # Custom added stuff
 .idea
-settings/
-templates/bobber_templates/
-templates/dev_templates/
-game_screenshot.png
+#settings/
+#templates/bobber_templates/
+#templates/dev_templates/
+#game_screenshot.png
 test.py
 
 # Byte-compiled / optimized / DLL files
