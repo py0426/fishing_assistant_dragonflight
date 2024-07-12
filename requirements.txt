@@ -9,3 +9,4 @@ pyHM
 pytz
 pyserial
 loguru
+yolov5

@@ -30,6 +30,7 @@ class SettingsHelper:
         """returns settings from settings.ini or creates a default if it doesn't exist."""
         logger.info("Getting settings...")
         config = configparser.ConfigParser()
+
         settings_path = f"{self.root_dir}\\settings\\settings.ini"
         # Create a default settings file if one doesn't already exist.
         if not os.path.isfile(settings_path):
@@ -74,5 +75,8 @@ class SettingsHelper:
             with open(settings_path, "w+") as config_file:
                 config.write(config_file)
         # Add settings from settings file to config and return the config
-        config.read(settings_path)
+        # config.read(settings_path)
+        config.read(settings_path,encoding='utf-8')
+        # # 指定编码为UTF-8
+        # config.read('example.ini', encoding='utf-8')
         return config

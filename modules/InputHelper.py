@@ -224,8 +224,13 @@ class ArduinoHelper:
         self.poll_cmd(packet)
 
 
-    def click_mouse(self, right_click = False):
-        packet = "click_mouse,"
+    def click_mouse(self, click_method = "left"):
+        """
+        点击鼠标
+        params:
+            click_method: left, right, middle
+        """
+        packet = f"click_mouse,{click_method}"
         self.poll_cmd(packet)
 
 

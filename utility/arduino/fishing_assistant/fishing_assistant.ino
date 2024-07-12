@@ -1,6 +1,7 @@
 #include <Keyboard.h>
 #include <Mouse.h>
 
+//KeyboardLayout_en_US
 // "reaction time" between key presses
 const unsigned int LOWER_REACTION = 180;
 const unsigned int UPPER_REACTION = 310;
@@ -9,7 +10,7 @@ void setup() {
   // open the serial port on arduino
   Serial.begin(115200);
   // initialize keyboard
-  Keyboard.begin(KeyboardLayout_en_US);
+  Keyboard.begin();
   // Initialize mouse
   Mouse.begin();
 }
@@ -28,17 +29,30 @@ void loop() {
     if (eventType == "move_mouse") {
       move_mouse(params);
     } else if (eventType == "click_mouse") {
-      click_mouse();
+      click_mouse(params);
     } else if (eventType == "type_string") {
       type_string(params);
     }
   }
 }
 
-void click_mouse() {
+void click_mouse(String params) {
   // Serial.println("Clicking mouse");
-  Mouse.click();
-  Serial.println("Finished");
+  int inputStringIndex = params.indexOf(',');
+  String inputString = params.substring(0, inputStringIndex);
+//  Serial.println("Clicking mouse");
+  if (inputString == "right") {
+    Mouse.click(MOUSE_RIGHT);
+//    Serial.println("Clicking MOUSE_RIGHT");
+  } else if (inputString == "middle"){
+    Mouse.click(MOUSE_MIDDLE);
+//    Serial.println("Clicking MOUSE_MIDDLE");
+  } else {
+    Mouse.click(MOUSE_LEFT);
+//    Serial.println("Clicking MOUSE_LEFT");
+  }
+
+ Serial.println("Finished");
 }
 
 void type_string(String params) {
